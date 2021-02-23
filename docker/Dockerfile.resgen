@@ -1,0 +1,12 @@
+FROM golang:1.13
+
+RUN go get github.com/rakyll/statik
+
+WORKDIR /app
+
+COPY . ./src
+
+RUN statik -src=./src/swagger-ui -dest=./src -p=resources -f -ns=swagger \
+    && statik -src=./src/example/services -dest=./src/example -p=resources -f -ns=example
+
+CMD ["sh", "-c", "echo 'Done.']

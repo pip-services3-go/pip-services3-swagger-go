@@ -1,0 +1,6 @@
+{
+  "name": "pip-services3-swagger-go",
+  "registry": "github.com/pip-services3-go",
+  "version": "3.0.0",
+  "build": 0
+}
