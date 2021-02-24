@@ -122,11 +122,29 @@ func (c *SwaggerService) redirectToIndex(res http.ResponseWriter, req *http.Requ
 	http.Redirect(res, req, url+"index.html", http.StatusSeeOther)
 }
 
+func (c *SwaggerService) composeSwaggerRoute(baseRoute string, route string) string {
+	if baseRoute != "" {
+		if route == "" {
+			route = "/"
+		}
+		if !strings.HasPrefix(route, "/") {
+			route = "/" + route
+		}
+		if !strings.HasPrefix(baseRoute, "/") {
+			baseRoute = "/" + baseRoute
+		}
+		route = baseRoute + route
+	}
+
+	return route
+}
+
 func (c *SwaggerService) RegisterOpenApiSpec(baseRoute string, swaggerRoute string) {
+	route := c.composeSwaggerRoute(baseRoute, swaggerRoute)
 	if baseRoute == "" {
 		baseRoute = "default"
 	}
-	c.routes[baseRoute] = swaggerRoute
+	c.routes[baseRoute] = route
 }
 
 func (c *SwaggerService) Register() {
