@@ -24,6 +24,8 @@ go get github.com/pip-services3-go/pip-services3-swagger-go
 
 Develop a RESTful service component. For example, it may look the following way.
 In the `Register` method we load an Open API specification for the service.
+If you are planning to use the REST service as a library, then embed the Open API specification
+as a resource using a library like [Statik](https://github.com/rakyll/statik).
 You can also enable swagger by default in the constractor by setting `SwaggerEnable` property.
 ```golang
 type MyRestService struct {
