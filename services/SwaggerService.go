@@ -21,9 +21,8 @@ type SwaggerService struct {
 }
 
 func NewSwaggerService() *SwaggerService {
-	c := SwaggerService{}
-	c.RestService = cservices.NewRestService()
-	c.RestService.IRegisterable = &c
+	c := &SwaggerService{}
+	c.RestService = cservices.InheritRestService(c)
 	c.BaseRoute = "swagger"
 	c.routes = map[string]string{}
 
@@ -36,7 +35,7 @@ func NewSwaggerService() *SwaggerService {
 	// c.RegisterOpenApiSpec("dummies", "/dummies/swagger")
 	// c.RegisterOpenApiSpec("dummies2", "/dummies2/swagger")
 
-	return &c
+	return c
 }
 
 func (c *SwaggerService) calculateContentType(fileName string) string {
